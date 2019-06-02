@@ -54,6 +54,11 @@ router.post('/register', (req, res, next) => (async () => {
     name,
     introduction,
     hobbies,
+    year,
+    month,
+    day,
+    intensiveness,
+    gym,
   } = req.body;
 
   const hashedPassword = await bcrypt.hash(password, 4);
@@ -62,6 +67,11 @@ router.post('/register', (req, res, next) => (async () => {
     email,
     gender,
     name,
+    year,
+    month,
+    day,
+    intensiveness,
+    gym,
     introduce: introduction,
     hobby: hobbies,
     profile_img: filename,
