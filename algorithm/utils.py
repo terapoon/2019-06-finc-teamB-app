@@ -1,10 +1,11 @@
 import numpy as np
 import pandas as pd
-import MeCab
-from gensim.models import KeyedVectors
+# import MeCab
+# from gensim.models import KeyedVectors
 from datetime import date
+from ngram import calc_relevance_vector
 
-
+'''
 def _get_word_vector_from_text(text, option, model):
     mt = MeCab.Tagger('')
     sum_vec = np.zeros(option['WORD_VECTOR_LEN'])
@@ -16,11 +17,13 @@ def _get_word_vector_from_text(text, option, model):
             sum_vec += model.wv[node.surface]
             word_count += 1
     return sum_vec / word_count
+'''
 
-def _calc_cos_of_2_texts(text1, text2, option, model):
-    vector1 = _get_word_vector_from_text(text1, option, model)
-    vector2 = _get_word_vector_from_text(text2, option, model)
-    return np.dot(vector1, vector2) / (np.linalg.norm(vector1) * np.linalg.norm(vector2))
+def _calc_cos_of_2_texts(text1, text2, option): # ,model):
+    # vector1 = _get_word_vector_from_text(text1, option, model)
+    # vector2 = _get_word_vector_from_text(text2, option, model)
+    # return np.dot(vector1, vector2) / (np.linalg.norm(vector1) * np.linalg.norm(vector2))
+    return calc_relevance_vector(text1, text2, option)
 
 def _calc_cos_of_2_vectors(vector1, vector2):
     return np.dot(vector1, vector2) / (np.linalg.norm(vector1) * np.linalg.norm(vector2))
@@ -77,7 +80,7 @@ def calc_cost(male_df, female_df, info_option, cost_option):
         for _, female_row in female_df.iterrows():
             # manually inputted info
             # female id
-            female_id = male_row['id'] 
+            female_id = female_row['id'] 
             # female age
             today = date.today()
             female_birthday = date(female_row['year'], female_row['month'], female_row['day'])
@@ -122,9 +125,9 @@ def calc_cost(male_df, female_df, info_option, cost_option):
                 edge_cost = info_option['ERROR']
             else:
                 # similarity of hobby
-                hobby_relevance = 0 # _calc_cos_of_2_texts(male_hobby, female_hobby, info_option, model)
+                hobby_relevance = _calc_cos_of_2_texts(male_hobby, female_hobby, cost_option)
                 # similarity of introduce sentence
-                introduce_relevance = 0 # _calc_cos_of_2_texts(male_introduce, female_introduce, info_option, model)
+                introduce_relevance = _calc_cos_of_2_texts(male_introduce, female_introduce, cost_option)
                 # similarity of basic info (age, gym, intensiveness)
                 male_vector = np.array([cost_option['AGE_COST']*male_age,
                             cost_option['GYM_COST']*male_gym,
