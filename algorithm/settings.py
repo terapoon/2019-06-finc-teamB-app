@@ -2,8 +2,8 @@ INFO_DICT = {
     'INPUT_FILE_PATH' : './dummy.csv',
     'COST_TABLE_FILE_PATH' : './cost_table.csv',
     'ORDER_FILE_PATH' : './order.csv',
-    'UPPER_AGE_MARGIN' : 5,
-    'LOWER_AGE_MARGIN' : 5,
+    'UPPER_AGE_MARGIN' : 10,
+    'LOWER_AGE_MARGIN' : 10,
     'ERROR' : -999,
     'NULL' : -999,
     'DEFAULT' : 0
