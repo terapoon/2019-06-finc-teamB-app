@@ -1,21 +1,38 @@
 drop database test;
 create database test;
+ALTER DATABASE test default character set utf8;
 use test;
 
 create table users (
   `id` int AUTO_INCREMENT,
-  `email` varchar(256) not null unique,
-  `hashed_password` text not null,
+  `email` varchar(64) not null unique,
+  `hashed_password` varchar(64) not null,
   `gender` int not null,
+  `year` int,
+  `month` int,
+  `day` int,
   `available_year` int,
   `available_month` int,
   `available_date` int,
   `available_area` int,
   `available_slot` int,
-  `profile_img` text not null,
-  `hobbies` text,
-  `name` text,
-  `introduction` text,
+  `profile_img` varchar(64) not null,
+  `hobby` varchar(64),
+  `name` varchar(64),
+  `introduce` text,
+  `steps` int,
+  `weight` int,
+  `bmi` int,
+  `bodyfat` int,
+  `visfat` int,
+  `muscle` int,
+  `bodyage` int,
+  `goal_weight` int,
+  `goal_steps` int,
+  `goal_sleep-hour` int,
+  `goal_sleep_minute` int,
+  `gym` int,
+  `intensiveness` int,
   PRIMARY KEY (id)
 );
 
@@ -47,13 +64,13 @@ create table user_costs (
 
 create table areas (
   `id` int AUTO_INCREMENT,
-  `name` text,
+  `name` varchar(64),
   PRIMARY KEY (id)
 );
 
 create table slots (
   `id` int AUTO_INCREMENT,
-  `name` text,
+  `name` varchar(64),
   PRIMARY KEY (id)
 );
 

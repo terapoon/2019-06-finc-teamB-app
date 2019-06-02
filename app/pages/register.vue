@@ -45,6 +45,48 @@
       </div>
       <div class="form-group">
         <input
+          v-model="year"
+          type="text"
+          placeholder="誕生年(例: 1999)"
+          class="form-control">
+      </div>
+      <div class="form-group">
+        <input
+          v-model="month"
+          type="text"
+          placeholder="誕生月(例: 10)"
+          class="form-control">
+      </div>
+      <div class="form-group">
+        <input
+          v-model="day"
+          type="text"
+          placeholder="誕生日(例: 21)"
+          class="form-control">
+      </div>
+      <p>これまでに何度ジムを利用しましたか</p>
+      <div class="form-group">
+        <select
+          v-model="gym"
+          class="form-control">
+          <option value="0">初めて</option>
+          <option value="1">1〜5回</option>
+          <option value="2">それ以上</option>
+        </select>
+      </div>
+      <p>運動する頻度</p>
+      <div class="form-group">
+        <select
+          v-model="intensiveness"
+          class="form-control">
+          <option value="0">全くしない</option>
+          <option value="1">月2〜3回程度</option>
+          <option value="2">毎週する</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <input
           type="file"
           @change="onFileChange">
       </div>
@@ -62,6 +104,9 @@
 export default {
   data() {
     return {
+      year: '',
+      month: '',
+      day: '',
       email: '',
       password: '',
       fileToUpload: '',
@@ -69,20 +114,9 @@ export default {
       name: '',
       introduction: '',
       hobbies: '',
+      intensiveness: '0',
+      gym: '0',
     };
-  },
-  async mounted() {
-    const isLoggedIn = await this.$axios.get('/matches', {
-      headers: {
-        'X-AUTH-TOKEN': this.$store.state.token,
-      },
-    })
-      .then(() => true)
-      .catch(() => false);
-
-    if (isLoggedIn) {
-      this.$router.push('/filter');
-    }
   },
   methods: {
     onFileChange(e) {
@@ -93,7 +127,6 @@ export default {
       if (
         !this.email
         || !this.password
-        || !this.fileToUpload
         || !this.name
         || !this.introduction
         || !this.hobbies
@@ -101,24 +134,37 @@ export default {
         return;
       }
 
-      const formData = new FormData();
-      formData.append('profile', this.fileToUpload);
+      const filename = await (async () => {
+        if (!this.fileToUpload) {
+          return null;
+        }
 
-      const { filename } = await this.$axios.post('/image', formData, {
-        headers: {
-          'content-type': 'multipart/form-data',
-        },
-      })
-        .then(i => i.data);
+        const formData = new FormData();
+        formData.append('profile', this.fileToUpload);
+
+        const { filename } = await this.$axios.post('/image', formData, {
+          headers: {
+            'content-type': 'multipart/form-data',
+          },
+        })
+          .then(i => i.data);
+
+        return filename;
+      })();
 
       const token = await this.$axios.post('/register', {
         filename,
+        year: Number(this.year),
+        month: Number(this.month),
+        day: Number(this.day),
         name: this.name,
         introduction: this.introduction,
         hobbies: this.hobbies,
         gender: Number(this.gender),
         email: this.email,
         password: this.password,
+        gym: Number(this.gym),
+        intensiveness: Number(this.intensiveness),
       })
         .then(i => i.data.token)
         .catch(console.error);
@@ -129,18 +175,15 @@ export default {
       }
     },
   },
-  head() {
-    return {
-      meta: [
-        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      ],
-    };
-  },
 };
 </script>
 
 <style scoped>
 section {
-  padding: 30px;
+  padding: 60px;
+}
+
+section * {
+  font-size: 40px;
 }
 </style>

@@ -101,12 +101,5 @@ export default {
       this.$router.push('/swipe');
     }
   },
-  head() {
-    return {
-      meta: [
-        { name: 'viewport', content: '' },
-      ],
-    };
-  },
 };
 </script>

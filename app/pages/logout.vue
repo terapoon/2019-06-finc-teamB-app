@@ -6,7 +6,7 @@
 export default {
   mounted() {
     this.$store.commit('setToken', '');
-    this.$router.push('/login');
+    setTimeout(() => this.$router.push('/login'), 1000);
   },
 };
 </script>

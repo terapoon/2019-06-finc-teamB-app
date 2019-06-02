@@ -17,8 +17,9 @@
       </div>
       <button
         type="submit"
-        class="btn btn-secondary btn-block"
+        class="btn btn-secondary btn-block mb-3"
         @click="login">ログイン</button>
+      <p class="text-center"><nuxt-link to="/register">登録はこちら</nuxt-link></p>
     </div>
   </section>
 </template>
@@ -30,19 +31,6 @@ export default {
       email: '',
       password: '',
     };
-  },
-  async mounted() {
-    const isLoggedIn = await this.$axios.get('/matches', {
-      headers: {
-        'X-AUTH-TOKEN': this.$store.state.token,
-      },
-    })
-      .then(() => true)
-      .catch(() => false);
-
-    if (isLoggedIn) {
-      this.$router.push('/filter');
-    }
   },
   methods: {
     async login() {
@@ -60,18 +48,15 @@ export default {
       }
     },
   },
-  head() {
-    return {
-      meta: [
-        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      ],
-    };
-  },
 };
 </script>
 
 <style scoped>
 section {
-  padding: 30px;
+  padding: 60px;
+}
+
+section * {
+  font-size: 40px;
 }
 </style>
