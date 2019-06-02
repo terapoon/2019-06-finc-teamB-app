@@ -127,7 +127,6 @@ export default {
       if (
         !this.email
         || !this.password
-        || !this.fileToUpload
         || !this.name
         || !this.introduction
         || !this.hobbies
@@ -135,15 +134,23 @@ export default {
         return;
       }
 
-      const formData = new FormData();
-      formData.append('profile', this.fileToUpload);
+      const filename = await (async () => {
+        if (!this.fileToUpload) {
+          return null;
+        }
 
-      const { filename } = await this.$axios.post('/image', formData, {
-        headers: {
-          'content-type': 'multipart/form-data',
-        },
-      })
-        .then(i => i.data);
+        const formData = new FormData();
+        formData.append('profile', this.fileToUpload);
+
+        const { filename } = await this.$axios.post('/image', formData, {
+          headers: {
+            'content-type': 'multipart/form-data',
+          },
+        })
+          .then(i => i.data);
+
+        return filename;
+      })();
 
       const token = await this.$axios.post('/register', {
         filename,

@@ -74,7 +74,7 @@ router.post('/register', (req, res, next) => (async () => {
     gym,
     introduce: introduction,
     hobby: hobbies,
-    profile_img: filename,
+    profile_img: filename || 'thinking.png',
     hashed_password: hashedPassword,
   });
 
