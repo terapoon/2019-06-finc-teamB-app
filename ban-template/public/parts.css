@@ -4,6 +4,21 @@ body{
     font-weight: 500;
     font-feature-settings: "pkna";
     letter-spacing: 0.1em;
+    margin: 0;
+    color: rgba(0,0,0,0.8);
+}
+
+.bg-pink{
+    background-color: #f424cc;
+}
+.white{
+    color: #fff !important;
+}
+.grey-white{
+    color: rgba(255,255,255,0.7) !important;
+}
+.grey-text{
+    color: rgba(0,0,0,0.45) !important;
 }
 
 .appbar{
@@ -99,6 +114,8 @@ img.chat{
     font-size: 48px;
     border-radius: 36px;
     position: relative;
+    background-color: #fff;
+    z-index: 99;
 }
 .card-image{
     width: 100%;
@@ -158,6 +175,8 @@ img.chat{
     display: -ms-flex;
     display: -o-flex;
     display: flex;
+    -ms-align-items: center;
+    align-items: center;
     padding: 48px 56px;
     padding-top: 24px;
 }
@@ -166,4 +185,69 @@ img.chat{
 }
 .margin-right{
     margin-right: 48px;
+}
+.padding-bottom{
+    padding-bottom: 56px;
+}
+.bg-blue{
+    position: relative;
+    top: -200px;
+    z-index: 0;
+    background-color: #471ff0;
+    padding: 200px 0px 120px 0px;
+}
+.tac{
+    text-align: center;
+}
+.row{
+    margin: 0 56px;
+    padding: 32px;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    -ms-align-items: center;
+    align-items: center;
+}
+.row-left{
+    width: 240px;
+    font-size: 36px;
+    letter-spacing: 0.2em;
+}
+.row-right{
+    flex-grow: 1;
+    font-size: 40px;
+}
+.gym-image{
+    height: 480px;
+}
+.gym-name{
+    font-size: 40px;
+    flex-grow: 1;
+}
+.reserved{
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    -ms-align-items: center;
+    align-items: center;
+    font-size: 36px;
+    flex-grow: 1;
+    color: #1AAA46;
+}
+.reserved img{
+    width: 1.5em;
+    margin-right: 24px;
+}
+.cancel{
+    font-size: 36px;
+}
+.paid{
+    text-align: right;
+}
+.mb-clear{
+    margin-bottom: 36px;
 }
