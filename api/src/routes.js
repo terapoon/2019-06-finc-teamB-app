@@ -62,8 +62,8 @@ router.post('/register', (req, res, next) => (async () => {
     email,
     gender,
     name,
-    introduction,
-    hobbies,
+    introduce: introduction,
+    hobby: hobbies,
     profile_img: filename,
     hashed_password: hashedPassword,
   });
