@@ -184,6 +184,13 @@ export default {
       this.cards = rest;
     },
   },
+  head() {
+    return {
+      meta: [
+        { name: 'viewport', content: '' },
+      ],
+    };
+  },
 };
 </script>
 

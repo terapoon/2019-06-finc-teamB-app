@@ -1,5 +1,5 @@
 <template>
-  <section class="container">
+  <section>
     <div>
       <div class="form-group">
         <input
@@ -60,5 +60,18 @@ export default {
       }
     },
   },
+  head() {
+    return {
+      meta: [
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      ],
+    };
+  },
 };
 </script>
+
+<style scoped>
+section {
+  padding: 30px;
+}
+</style>
