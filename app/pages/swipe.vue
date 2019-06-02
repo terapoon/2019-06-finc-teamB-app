@@ -1,29 +1,92 @@
 <template>
   <section>
-    <div>
-      <p>{{ area }}&nbsp;{{ me.availableMonth }}/{{ me.availableDate }}&nbsp;{{ slot }}から</p>
-      <p style="font-size: 150%;">{{ cards.length }}人の候補</p>
-      <transition name="fade">
-        <div v-if="cards.length">
-          <p v-text="card.name"/>
-          <p v-if="card.liked">あなたのことが気になっています</p>
-          <p>
+    <div class="appbar">
+      <img
+        :src="`/api/uploads/${me.profileImg}`"
+        alt=""
+        class="profile">
+      <div class="title">
+        <div class="filter">{{ area }}&nbsp;{{ me.availableMonth }}/{{ me.availableDate }}&nbsp;{{ slot }}から</div>
+        <div class="header">{{ cards.length }}人の候補</div>
+      </div>
+      <img
+        src="~/assets/chat.svg"
+        alt=""
+        class="chat">
+    </div>
+
+    <transition name="fade">
+      <div v-if="cards.length">
+        <div
+          v-if="!card.liked"
+          class="card-wrapper">
+          <div class="card">
             <img
               :src="`/api/uploads/${card.profile_img}`"
-              width="200">
-          </p>
-          <p><button
-            class="btn btn-primary"
-            @click="swipe('like')">like</button>
-            <button
-              class="btn btn-danger"
-              @click="swipe('dislike')">dislike</button></p>
+              class="card-image"
+              alt="">
+            <div class="card-property">
+              <div class="card-name">{{ card.name }}</div>
+              <div class="card-age">19</div>
+              <img
+                src="~/assets/info.svg"
+                alt="">
+            </div>
+            <div class="card-button">
+              <div
+                class="button outline-blue margin-right"
+                @click="swipe('dislike')">やめとく</div>
+              <div class="button outline-pink flex-grow">
+                <img
+                  src="~/assets/favorite-pink.svg"
+                  alt="favorite">
+                <div
+                  class="button-text"
+                  @click="swipe('like')">気になる</div>
+              </div>
+            </div>
+          </div>
         </div>
-      </transition>
-      <!-- <img
-        :src="`/api/uploads/${me.profileImg}`"
-        width="100"> -->
-    </div>
+
+        <div
+          v-else
+          class="card-wrapper">
+          <div class="card">
+            <img
+              :src="`/api/uploads/${card.profile_img}`"
+              class="card-image"
+              alt="">
+            <div class="matching-alert-wrapper">
+              <div class="matching-alert">
+                <img
+                  src="assets/alert.svg"
+                  alt="">あなたのことが気になっています
+              </div>
+            </div>
+            <div class="card-property">
+              <div class="card-name">{{ card.name }}</div>
+              <div class="card-age">19</div>
+              <img
+                src="~/assets/info.svg"
+                alt="">
+            </div>
+            <div class="card-button">
+              <div
+                class="button outline-blue margin-right"
+                @click="swipe('dislike')">やめとく</div>
+              <div class="button filled-pink flex-grow">
+                <img
+                  src="~/assets/favorite-white.svg"
+                  alt="favorite">
+                <div
+                  class="button-text"
+                  @click="swipe('like')">今すぐマッチ</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </transition>
   </section>
 </template>
 
@@ -125,11 +188,4 @@ export default {
 </script>
 
 <style>
-.container {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
 </style>
