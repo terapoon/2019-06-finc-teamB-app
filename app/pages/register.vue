@@ -71,19 +71,6 @@ export default {
       hobbies: '',
     };
   },
-  async mounted() {
-    const isLoggedIn = await this.$axios.get('/matches', {
-      headers: {
-        'X-AUTH-TOKEN': this.$store.state.token,
-      },
-    })
-      .then(() => true)
-      .catch(() => false);
-
-    if (isLoggedIn) {
-      this.$router.push('/filter');
-    }
-  },
   methods: {
     onFileChange(e) {
       const files = e.target.files || e.dataTransfer.files;

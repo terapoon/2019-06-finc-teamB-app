@@ -32,19 +32,6 @@ export default {
       password: '',
     };
   },
-  async mounted() {
-    const isLoggedIn = await this.$axios.get('/matches', {
-      headers: {
-        'X-AUTH-TOKEN': this.$store.state.token,
-      },
-    })
-      .then(() => true)
-      .catch(() => false);
-
-    if (isLoggedIn) {
-      this.$router.push('/filter');
-    }
-  },
   methods: {
     async login() {
       const token = await this.$axios.post('/login', {
