@@ -1,0 +1,29 @@
+version: '3'
+services:
+  db:
+    image: mysql:5
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+      MYSQL_DATABASE: test
+    ports:
+      - 3306:3306
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
+  # api:
+  #   image: node:10
+  #   working_dir: /src
+  #   volumes:
+  #     - ./api:/src
+  #   ports:
+  #     - 4000:4000
+  #   command: sh -c "npm i && npm run dev"
+  # app:
+  #   image: node:10
+  #   working_dir: /src
+  #   volumes:
+  #     - ./app:/src
+  #   ports:
+  #     - 3000:3000
+  #   command: sh -c "npm i && npm run dev"
