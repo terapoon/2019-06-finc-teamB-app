@@ -17,8 +17,9 @@
       </div>
       <button
         type="submit"
-        class="btn btn-secondary btn-block"
+        class="btn btn-secondary btn-block mb-3"
         @click="login">ログイン</button>
+      <p class="text-center"><nuxt-link to="/register">登録はこちら</nuxt-link></p>
     </div>
   </section>
 </template>
