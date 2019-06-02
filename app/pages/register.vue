@@ -134,6 +134,10 @@ export default {
 
 <style scoped>
 section {
-  padding: 30px;
+  padding: 60px;
+}
+
+section * {
+  font-size: 30px;
 }
 </style>
