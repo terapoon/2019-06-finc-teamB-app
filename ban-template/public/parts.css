@@ -195,6 +195,7 @@ img.chat{
     z-index: 0;
     background-color: #471ff0;
     padding: 200px 0px 120px 0px;
+    margin-bottom: -100px;
 }
 .tac{
     text-align: center;
@@ -250,4 +251,12 @@ img.chat{
 }
 .mb-clear{
     margin-bottom: 36px;
+}
+.menu-image{
+    position: relative;
+    left: -5%;
+    right: 5%;
+    width: 110%;
+    object-fit: cover;
+    margin: 0 auto;
 }
